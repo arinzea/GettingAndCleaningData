@@ -1,6 +1,6 @@
 #Getting and Cleaning Data Course Project
-# Set appropriate working directory
-setwd("/Users/Oracle/OneDrive/Data-science/3-GettingCleaningData")
+# Set appropriate working directory. Here the wroking directory is assumed
+#setwd("~/")
 
 #Check if a data directory exists, if not create one
 if(!file.exists("data")){
@@ -25,9 +25,9 @@ unzip("./data/projectDataset.zip")
 
 #read in the dataset using fast read
 library(data.table)
-x_train <- fread("/Users/Oracle/OneDrive/Data-science/3-GettingCleaningData/UCI HAR Dataset/train/X_train.txt")
-y_train <- fread("/Users/Oracle/OneDrive/Data-science/3-GettingCleaningData/UCI HAR Dataset/train/y_train.txt")
-subject_train <- fread("/Users/Oracle/OneDrive/Data-science/3-GettingCleaningData/UCI HAR Dataset/train/subject_train.txt")
+x_train <- fread("UCI HAR Dataset/train/X_train.txt")
+y_train <- fread("UCI HAR Dataset/train/y_train.txt")
+subject_train <- fread("UCI HAR Dataset/train/subject_train.txt")
 
 #look at the data
 str(x_train)
@@ -36,16 +36,16 @@ table(sapply(y_train, class))
 table(sapply(subject_train, class))
 
 uci_train <- cbind(x_train,y_train,subject_train)
-x_test <- fread("/Users/Oracle/OneDrive/Data-science/3-GettingCleaningData/UCI HAR Dataset/test/X_test.txt")
-y_test <- fread("/Users/Oracle/OneDrive/Data-science/3-GettingCleaningData/UCI HAR Dataset/test/y_test.txt")
-subject_test <- fread("/Users/Oracle/OneDrive/Data-science/3-GettingCleaningData/UCI HAR Dataset/test/subject_test.txt")
+x_test <- fread("UCI HAR Dataset/test/X_test.txt")
+y_test <- fread("UCI HAR Dataset/test/y_test.txt")
+subject_test <- fread("UCI HAR Dataset/test/subject_test.txt")
 
 uci_test <- cbind(x_test,y_test,subject_test)
 
 #combine all datasets
 uci_all <- rbind(uci_train,uci_test)
 
-feature_names <- read.table("/Users/Oracle/OneDrive/Data-science/3-GettingCleaningData/UCI HAR Dataset/features.txt")
+feature_names <- read.table("UCI HAR Dataset/features.txt")
 #Extract the names of the variables
 feature_names$V1 <- NULL
 feature_names_char <- as.character(as.factor(feature_names$V2))
@@ -73,7 +73,7 @@ mean_std <- cbind(mean_measurements,std_measurements)
 #This answers question number 3 and 4
 #extract the y-label (activity) and subject tests
 y_subject <- uci_all[,562:563]
-head(y_subject)
+#head(y_subject)
 library(dplyr)
 #rename the two columns accordingly to Activity and Subject
 y_subject <- rename(y_subject,Activity = V1, Subject = V1.1)
@@ -88,7 +88,6 @@ dim(mean_std_y_subject)
 
 #The variable names (1:79) do not need any further renaming because their values and meanings are documented
 #They are the measurements on the mean and standard deviation for each measurement
-
 
 #This answers question number 5
 library(dplyr)
