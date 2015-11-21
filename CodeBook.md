@@ -48,8 +48,8 @@ Additional vectors obtained by averaging the signals in a signal window sample. 
 
 The set of variables that were estimated from these signals are: 
 
-mean(): Mean value
-std(): Standard deviation
+* mean(): Mean value
+* std(): Standard deviation
 
 Each value of the features (from 3 to 81) is the average of each variable for each activity and each subject i.e. the average mean and average standard deviation of the 30 subjects who performed the 6 activities (a total of 180 observations). The features in this dataset are shown below.
 
